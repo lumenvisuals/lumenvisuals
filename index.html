@@ -179,7 +179,7 @@
 
   <nav id="nav">
     <div class="container nav-container">
-      <a href="#" class="nav-logo">Lumen<span> </span>Visuals Studio</a>
+      <a href="#" class="nav-logo">Lumen<span>.</span>Visuals Studio</a>
       <ul class="nav-menu">
         <li><a href="#features">Capabilities</a></li>
         <li><a href="#portfolio">Work</a></li>
@@ -439,7 +439,7 @@
 
   <footer>
     <div class="container footer-layout">
-      <div class="nav-logo">Lumen<span> </span>Visuals Studio</div>
+      <div class="nav-logo">Lumen<span>.</span>Visuals Studio</div>
       <div class="footer-credits">&copy; 2026 Lumen Visuals Studio. All rights reserved.</div>
     </div>
   </footer>
@@ -465,6 +465,8 @@
     import { DRACOLoader }   from 'three/addons/loaders/DRACOLoader.js';
     import { RGBELoader }    from 'three/addons/loaders/RGBELoader.js';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 
     const canvas     = document.getElementById('heroModelCanvas');
     const container  = document.getElementById('heroModelContainer');
@@ -537,11 +539,11 @@
 
     // ── DRACOLoader: required for Draco-compressed GLBs ──
     const dracoLoader = new DRACOLoader();
-    // Switched to Google's official, highly reliable, and CORS-configured CDN for Draco decoders
-    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
+    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
 
     const gltfLoader = new GLTFLoader();
     gltfLoader.setDRACOLoader(dracoLoader);
+    gltfLoader.setMeshoptDecoder(MeshoptDecoder);
 
     gltfLoader.load(
       'assets/iphone.glb',
