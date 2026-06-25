@@ -146,4 +146,567 @@
     #faq { padding: 7rem 0; border-top: 1px solid var(--border); }
     .faq-container { max-width: 800px; margin: 3rem auto 0; }
     .faq-item { border-bottom: 1px solid var(--border); }
-    .faq-tr
+    .faq-trigger { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; letter-spacing: -0.01em; text-align: left; }
+    .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.16,1,0.3,1); }
+    .faq-content p { padding-bottom: 1.5rem; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
+    .faq-icon-arrow { transition: transform 0.3s ease; }
+    .faq-item.active .faq-icon-arrow { transform: rotate(180deg); }
+
+    #about { padding: 7rem 0; background: var(--surface); border-top: 1px solid var(--border); }
+    .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .about-image img { border-radius: 12px; border: 1px solid var(--border); }
+    .about-content h3 { font-family: var(--font-display); font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+    .about-p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.7; }
+
+    #contact { padding: 8rem 0; text-align: center; position: relative; overflow: hidden; border-top: 1px solid var(--border); }
+    .contact-card { background: radial-gradient(100% 100% at 50% 50%, rgba(99,102,241,0.08) 0%, transparent 100%); border: 1px solid var(--border); padding: 5rem 2rem; border-radius: 16px; max-width: 900px; margin: 0 auto; }
+    .contact-title { font-family: var(--font-display); font-size: clamp(1.8rem,4vw,3.2rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 1rem; }
+    .contact-sub { color: var(--text-muted); max-width: 500px; margin: 0 auto 2.5rem; }
+
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(3,7,18,0.98); z-index: 999; align-items: center; justify-content: center; padding: 2rem; }
+    .lightbox.open { display: flex; }
+    .lightbox-inner { max-width: 1000px; width: 100%; position: relative; }
+    .lightbox-close { position: absolute; top: -3rem; right: 0; color: var(--text-muted); font-size: 1.5rem; }
+    .lightbox-close:hover { color: var(--text); }
+
+    footer { border-top: 1px solid var(--border); padding: 3rem 0; }
+    .footer-layout { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-credits { font-size: 0.85rem; color: var(--text-dim); }
+
+    @media (max-width: 1024px) {
+      .bento-grid { grid-template-columns: 1fr; }
+      .col-6, .col-4, .col-8 { grid-column: span 12; }
+      .pipeline-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-wrapper { grid-template-columns: 1fr; min-height: auto; }
+      .hero-text { text-align: center; padding: 2rem 0 0; }
+      .hero-text .badge { display: inline-flex; }
+      .hero-sub { margin: 0 auto 2.5rem; }
+      .hero-buttons { justify-content: center; }
+      .trust-logos { justify-content: center; }
+      .hero-model-side { height: 60vw; min-height: 380px; max-height: 520px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 0; } .nav-menu { display: none; }
+      .comp-table-wrapper { overflow-x: auto; }
+      .comp-table th, .comp-table td { padding: 1rem; }
+      .hero-model-side { height: 70vw; min-height: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="container nav-container">
+      <a href="#" class="nav-logo">Lumen<span>.</span>Visuals Studio</a>
+      <ul class="nav-menu">
+        <li><a href="#features">Capabilities</a></li>
+        <li><a href="#portfolio">Work</a></li>
+        <li><a href="#comparison">Compare</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="mailto:lumenvisualsstudio@gmail.com" class="btn btn-secondary btn-sm">Get in Touch</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="hero">
+    <div class="dot-grid"></div>
+    <div class="glow-sphere"></div>
+    <div class="container" style="width:100%;max-width:100%;padding:0 3rem;">
+      <div class="hero-wrapper">
+
+        <!-- LEFT: text -->
+        <div class="hero-text">
+          <span class="badge reveal">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Artistic Product Storytelling
+          </span>
+          <h1 class="hero-headline reveal">Your product,<br /><em>impossible</em> to ignore.</h1>
+          <p class="hero-sub reveal">Cinematic 3D animation and lifelike visualization crafted to bring your products to life. Discover how organic motion, textured physics, and curated light play can captivate your audience.</p>
+          <div class="hero-buttons reveal">
+            <a href="#portfolio" class="btn btn-primary">View the Portfolio <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+            <a href="#contact" class="btn btn-secondary">Request Consultation</a>
+          </div>
+          <div class="trust-section reveal">
+            <p class="trust-title">Partnering with teams across premium industries</p>
+            <div class="trust-logos">
+              <span>Automotive</span><span>E-Commerce</span><span>Electronics</span><span>Luxury</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: 3D model -->
+        <div class="hero-model-side">
+          <div class="hero-model-container reveal" id="heroModelContainer">
+            <div class="model-loader" id="modelLoader">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="animate-spin">
+                <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+                <path d="M12 2a10 10 0 0 1 10 10" stroke="var(--accent)"></path>
+              </svg>
+              <span id="loaderText">Loading 3D asset</span>
+            </div>
+            <canvas id="heroModelCanvas"></canvas>
+            <div class="model-hint" id="modelHint">Drag to rotate &nbsp;·&nbsp; Scroll to spin</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="badge">Creative Focus</span>
+        <h2 class="section-title">Visual storytelling through high-fidelity motion</h2>
+        <p class="section-desc">We replace static commercial layouts with expressive digital compositions that engage senses and establish mood.</p>
+      </div>
+      <div class="bento-grid">
+        <div class="bento-card col-6 reveal">
+          <div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+          <h3 class="bento-title">Cinematic Camera Sweeps</h3>
+          <p class="bento-desc">Move beyond the physical constraints of heavy camera rigs. Experience gravity-defying macro detail shots, dramatic lighting shifts, and dynamic focal lengths.</p>
+        </div>
+        <div class="bento-card col-6 reveal">
+          <div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg></div>
+          <h3 class="bento-title">Tactile Texture Realism</h3>
+          <p class="bento-desc">Watch how glass refracts, metals reflect, and soft finishes respond to light. Every material is constructed to suggest a genuine sensory response.</p>
+        </div>
+        <div class="bento-card col-4 reveal">
+          <div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg></div>
+          <h3 class="bento-title">Expressive Art Direction</h3>
+          <p class="bento-desc">Creating abstract spaces, atmospheric environmental interactions, and conceptual narratives that build deep emotional connections with your product.</p>
+        </div>
+        <div class="bento-card col-8 reveal">
+          <div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div>
+          <h3 class="bento-title">Bringing Complex Assemblies to Life</h3>
+          <p class="bento-desc">Exposing internal architectures, separating nested internal systems, and presenting components floating together in fluid choreography. It's visualization transformed into digital art.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="badge">Selected Work</span>
+        <h2 class="section-title">Photorealistic Portfolios</h2>
+        <p class="section-desc">Interactive product visuals and conceptual automotive scenes generated entirely in 3D spaces.</p>
+      </div>
+      <div class="portfolio-filters reveal">
+        <button class="filter-btn active" data-filter="all">All Assets</button>
+        <button class="filter-btn" data-filter="product">Products</button>
+        <button class="filter-btn" data-filter="automotive">Automotive</button>
+        <button class="filter-btn" data-filter="video">Animations</button>
+      </div>
+      <div class="portfolio-grid" id="portfolioGrid">
+        <div class="portfolio-item reveal" data-cat="product"><img src="assets/jbl_edited.webp" alt="JBL Headphones" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">JBL Headphones</div></div></div>
+        <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/volvo1.webp" alt="Volvo S90" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="assets/insta_exploded_view.webp" alt="Insta360 Exploded" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Insta360 Exploded view</div></div></div>
+        <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/volvo2.webp" alt="Volvo S90" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="assets/insta360_hero_image.webp" alt="Insta360 Hero" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Insta360 Hero Image</div></div></div>
+        <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/volvo3.webp" alt="Volvo S90" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="assets/insta360_ice.webp" alt="Insta360" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Insta360</div></div></div>
+        <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/volvo4.webp" alt="Volvo S90 Interiors" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90 Interiors</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="assets/redbull1.webp" alt="Red Bull" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Red Bull</div></div></div>
+        <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/volvo5.webp" alt="Volvo S90 Interiors" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90 Interiors</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="assets/estee_lauder.webp" alt="Estee Lauder" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Estee Lauder</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="assets/hairdryer2.webp" alt="Airshot Hair Dryer" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Airshot Hair Dryer</div></div></div>
+        <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/Porche1.webp" alt="Porsche GT3" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Porsche GT3</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="assets/pen.webp" alt="Shadowskin Pen" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Shadowskin Pen</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="assets/lancaster.webp" alt="Lancaster Cream" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Lancaster Cream</div></div></div>
+        <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/Insta360.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Insta360</div></div></div>
+        <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/PorcheVideo1.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Porsche GT3</div></div></div>
+        <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/esteevideo.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Estee Lauder</div></div></div>
+        <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/VolvoVideo.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Volvo S90</div></div></div>
+        <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/redbull_video.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Red Bull</div></div></div>
+        <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/porche_video2.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Porsche Cinematic</div></div></div>
+        <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/Lancaster Cream (Spec).mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Lancaster Motion</div></div></div>
+        <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/energy_drink.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Energy Drink Showcase</div></div></div>
+        <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/shadowskin.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Shadowskin Sequence</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="badge">The Method</span>
+        <h2 class="section-title">The Creative Choreography</h2>
+        <p class="section-desc">A refined structural flow built to move your product from static idea to striking cinematic reveal.</p>
+      </div>
+      <div class="pipeline-grid">
+        <div class="pipeline-step reveal"><div class="step-num">01</div><h3 class="step-title">Creative Art Direction</h3><p class="step-desc">Establishing the aesthetic tone, moodboards, and narrative flow. We trace your product's design language to decide how to build its story.</p></div>
+        <div class="pipeline-step reveal"><div class="step-num">02</div><h3 class="step-title">Set Styling &amp; Choreography</h3><p class="step-desc">Styling custom virtual lighting arrays, creating rich physical materials, and choreographing smooth, natural camera movements.</p></div>
+        <div class="pipeline-step reveal"><div class="step-num">03</div><h3 class="step-title">High-Fidelity Rendering</h3><p class="step-desc">Processing motion sequences with optimal depth-of-field, lens blooms, and grain to deliver highly engaging cinematic assets.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="comparison">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="badge">Creative Freedom</span>
+        <h2 class="section-title">Studio Photoshoots vs. 3D Artistry</h2>
+        <p class="section-desc">Comparing traditional photography limits to the uncompromised artistic options of digital production.</p>
+      </div>
+      <div class="comp-table-wrapper reveal">
+        <table class="comp-table">
+          <thead><tr><th>Aesthetic Element</th><th>Traditional Studio Session</th><th>3D Art &amp; Animation Studio</th></tr></thead>
+          <tbody>
+            <tr><td>Camera Movement</td><td>Bound by physical rigs and gravity</td><td class="comp-highlight">Unlimited camera physics and micro macro-pans</td></tr>
+            <tr><td>Lighting Revisions</td><td>Requires physically reconstructing physical sets</td><td class="comp-highlight">Instant adjustments of color, shadow, and angle</td></tr>
+            <tr><td>Environmental Magic</td><td>Dependent on expensive physical props</td><td class="comp-highlight">Art-directed virtual spaces with infinite variety</td></tr>
+            <tr><td>Material Variations</td><td>Limited to exact physical samples provided</td><td class="comp-highlight">Dynamic, digital shifts in color and texture</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="engagement">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="badge">Creative Projects</span>
+        <h2 class="section-title">Bringing your product ideas to life</h2>
+        <p class="section-desc">Flexible creative framework packages built to scale along with your branding and marketing needs.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card reveal">
+          <div class="pricing-tier">Visual Spotlight</div>
+          <p class="pricing-desc">Perfect for targeted launches requiring stunning cinematic static renders to showcase style.</p>
+          <ul class="pricing-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>5x High-Resolution Static Renders</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Premium texture and material matching</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Curated environmental background sets</li>
+          </ul>
+          <a href="#contact" class="btn btn-secondary">Inquire Now</a>
+        </div>
+        <div class="pricing-card popular reveal">
+          <div class="pricing-tier">Omnichannel Suite</div>
+          <p class="pricing-desc">The complete standard package for modern brands launching across social, web, and print.</p>
+          <ul class="pricing-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>10x Static Renders + 1x Animation sequence</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Cinematic light play and organic camera motion</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Comprehensive art direction workflow</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Book Project</a>
+        </div>
+        <div class="pricing-card reveal">
+          <div class="pricing-tier">Enterprise Partnership</div>
+          <p class="pricing-desc">Dedicated retainer schedules for brands with evolving inventory counts.</p>
+          <ul class="pricing-features">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Continuous monthly animation queues</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Custom localized interactive 3D assets</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Direct, high-priority Slack communication</li>
+          </ul>
+          <a href="#contact" class="btn btn-secondary">Schedule Strategy</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="badge">FAQ</span>
+        <h2 class="section-title">Common Creative Questions</h2>
+        <p class="section-desc">Answers to assist in onboarding your digital asset project.</p>
+      </div>
+      <div class="faq-container reveal">
+        <div class="faq-item">
+          <button class="faq-trigger"><span>What do you need to start a project?</span><svg class="faq-icon-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="faq-content"><p>We can work with standard 3D CAD files (STEP, IGES, OBJ, FBX) or even simple reference photos and structural sketches. More than anything, we start with your vision, moodboards, and desired stylistic tone.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger"><span>Can we request stylistic revisions during production?</span><svg class="faq-icon-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="faq-content"><p>Yes. Our pipeline includes creative checkpoints for style approvals. You are able to critique lighting setups, composition layouts, and texture properties before the final high-definition rendering phase.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger"><span>What is the standard turnaround timeline?</span><svg class="faq-icon-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+          <div class="faq-content"><p>Typical timelines span 1 to 3 weeks depending on asset complexity, variant configurations, and animation requirements. High-priority launches can occasionally be fast-tracked.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="about-layout">
+        <div class="about-image reveal"><img src="assets/profilepic.webp" alt="Marco Marzico" /></div>
+        <div class="about-content reveal">
+          <span class="badge">About The Studio</span>
+          <h3>Artistry in Motion</h3>
+          <p class="about-p">I help premium brands bring their products to life through expressive 3D motion design. My focus is on creating emotive, high-fidelity animations where every frame feels tangible. I merge organic physical movements, bespoke materials, and curated lighting environments to evoke a genuine sensory connection with your audience.</p>
+          <p class="about-p">From abstract, atmospheric virtual sets to highly stylized macro detail sequences, my work is driven by an uncompromised eye for art direction and visual aesthetics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="contact-card reveal">
+        <span class="badge">Schedule Session</span>
+        <h2 class="contact-title">Let's bring your product's story to life</h2>
+        <p class="contact-sub">Share your project scope for a customized quote. Most projects launch active pipelines within one week of proposal signature.</p>
+        <a href="mailto:lumenvisualsstudio@gmail.com" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          lumenvisualsstudio@gmail.com
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-layout">
+      <div class="nav-logo">Lumen<span>.</span>Visuals Studio</div>
+      <div class="footer-credits">&copy; 2026 Lumen Visuals Studio. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-inner" id="lightboxInner">
+      <button class="lightbox-close" id="lightboxClose">Close</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       THREE.JS — iPhone 3D Model with material override
+       The GLB geometry is perfect; its Blender procedural
+       materials don't export, so we re-apply them here
+       using the exact PBR values from the GLB data.
+  ════════════════════════════════════════════════════ -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three":         "https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import * as THREE        from 'three';
+    import { GLTFLoader }    from 'three/addons/loaders/GLTFLoader.js';
+    import { RGBELoader }    from 'three/addons/loaders/RGBELoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    const canvas     = document.getElementById('heroModelCanvas');
+    const container  = document.getElementById('heroModelContainer');
+    const loaderEl   = document.getElementById('modelLoader');
+    const loaderText = document.getElementById('loaderText');
+    const hintEl     = document.getElementById('modelHint');
+
+    // ── Renderer ──────────────────────────────────────
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping         = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.2;
+    renderer.outputColorSpace    = THREE.SRGBColorSpace;
+
+    const scene  = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 100);
+    camera.position.set(0, 0.05, 2.8);
+
+    function onResize() {
+      const w = container.clientWidth, h = container.clientHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    onResize();
+    new ResizeObserver(onResize).observe(container);
+
+    // ── OrbitControls (drag to inspect, zoom) ─────────
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping   = true;
+    controls.dampingFactor   = 0.06;
+    controls.enablePan       = false;
+    controls.minDistance     = 1.4;
+    controls.maxDistance     = 5.0;
+    controls.minPolarAngle   = Math.PI * 0.2;
+    controls.maxPolarAngle   = Math.PI * 0.8;
+    controls.autoRotate      = false; // rotation driven by scroll only
+
+    // ── Scroll-driven rotation ────────────────────────
+    // scrolling down → rotate right (+Y), up → rotate left (-Y)
+    let scrollTarget  = 0;
+    let scrollCurrent = 0;
+    let lastScrollY   = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const delta   = window.scrollY - lastScrollY;
+      scrollTarget += delta * 0.002;   // ← strength: small = subtle
+      lastScrollY   = window.scrollY;
+    }, { passive: true });
+
+    // ── Render loop ───────────────────────────────────
+    function tick() {
+      requestAnimationFrame(tick);
+
+      // Ease scroll rotation to target (smooth deceleration)
+      scrollCurrent += (scrollTarget - scrollCurrent) * 0.06;
+
+      const pivot = scene.children.find(c => c.isGroup);
+      if (pivot) {
+        pivot.rotation.y = scrollCurrent;
+      }
+
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    tick();
+    new RGBELoader().load(
+      'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_08_1k.hdr',
+      hdr => {
+        hdr.mapping = THREE.EquirectangularReflectionMapping;
+        scene.environment = hdr;
+        scene.environmentIntensity = 1.0;
+      }
+    );
+
+    // Key light — slight cool-blue tint matching site accent
+    const key = new THREE.DirectionalLight(0xc0c8ff, 2.0);
+    key.position.set(4, 6, 4);
+    scene.add(key);
+    // Warm rim from behind
+    const rim = new THREE.DirectionalLight(0xfff0e0, 0.6);
+    rim.position.set(-3, 2, -4);
+    scene.add(rim);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+
+    // ── Load GLB ───────────────────────────────────────
+    new GLTFLoader().load(
+      'assets/Iphone.glb',
+
+      gltf => {
+        const model = gltf.scene;
+
+        // Auto-centre & scale
+        // Fix: 'LED DISPLAY' baked as metalness=1 which hides base colour textures.
+        // Override just that material's metalness so the baked screen texture shows.
+        model.traverse(node => {
+          if (!node.isMesh) return;
+          const mats = Array.isArray(node.material) ? node.material : [node.material];
+          mats.forEach(mat => {
+            if (mat.name && mat.name.trim() === 'LED DISPLAY') {
+              mat.metalness = 0;
+              mat.roughness = 0.15;
+              mat.needsUpdate = true;
+            }
+          });
+        });
+
+        // Auto-centre & scale the inner model
+        const box    = new THREE.Box3().setFromObject(model);
+        const size   = box.getSize(new THREE.Vector3());
+        const centre = box.getCenter(new THREE.Vector3());
+        model.position.sub(centre);
+        model.scale.setScalar(1.5 / Math.max(size.x, size.y, size.z));
+
+        // Nodes have a baked 90° X rotation, phone lies in XZ plane.
+        // Rotate X by -90° to stand it upright (Y becomes tall axis).
+        model.rotation.set(-Math.PI / 2, Math.PI * 0.12, 0);
+
+        // Wrap in pivot group — all scroll rotation happens on this
+        const pivot = new THREE.Group();
+        pivot.add(model);
+        scene.add(pivot);
+
+        loaderEl.classList.add('hidden');
+        setTimeout(() => hintEl.classList.add('visible'),   800);
+        setTimeout(() => hintEl.classList.remove('visible'), 4500);
+      },
+
+      xhr => {
+        if (xhr.total) loaderText.textContent = `Loading… ${Math.round(xhr.loaded/xhr.total*100)}%`;
+      },
+
+      err => {
+        console.error('GLB error:', err);
+        loaderText.textContent = 'Failed to load model';
+      }
+    );
+
+  </script>
+
+  <script>
+    // NAV SCROLL
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // SCROLL REVEAL
+    if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.01 });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+
+    // VIDEO LAZY LOAD
+    const vObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const v = e.target;
+        if (e.isIntersecting) {
+          if (v.dataset.src && !v.src) { v.src = v.dataset.src; v.load(); }
+          v.play().catch(() => {});
+        } else v.pause();
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('video[data-src]').forEach(v => vObs.observe(v));
+
+    // PORTFOLIO FILTER
+    const filters = document.querySelectorAll('.filter-btn');
+    const items   = document.querySelectorAll('.portfolio-item');
+    filters.forEach(btn => btn.addEventListener('click', () => {
+      filters.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      items.forEach(item => item.style.display = (f === 'all' || item.dataset.cat === f) ? 'block' : 'none');
+    }));
+
+    // FAQ
+    document.querySelectorAll('.faq-trigger').forEach(btn => btn.addEventListener('click', () => {
+      const parent = btn.parentElement, content = btn.nextElementSibling;
+      const wasActive = parent.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('active'); i.querySelector('.faq-content').style.maxHeight = null; });
+      if (!wasActive) { parent.classList.add('active'); content.style.maxHeight = content.scrollHeight + 'px'; }
+    }));
+
+    // LIGHTBOX
+    const lightbox = document.getElementById('lightbox');
+    const lbInner  = document.getElementById('lightboxInner');
+    const closeBtn = document.getElementById('lightboxClose');
+    items.forEach(item => item.addEventListener('click', () => {
+      Array.from(lbInner.children).forEach(c => { if (c !== closeBtn) c.remove(); });
+      const vid = item.querySelector('video'), img = item.querySelector('img');
+      if (vid) {
+        const c = document.createElement('video');
+        c.src = vid.src || vid.dataset.src; c.controls = true; c.autoplay = true; c.playsinline = true;
+        c.style.cssText = 'width:100%;border-radius:8px;';
+        lbInner.appendChild(c); c.load(); c.play().catch(() => { c.muted = true; c.play().catch(() => {}); });
+      } else if (img) {
+        const c = document.createElement('img');
+        c.src = img.src; c.style.cssText = 'width:100%;border-radius:8px;'; lbInner.appendChild(c);
+      }
+      lightbox.classList.add('open'); document.body.style.overflow = 'hidden';
+    }));
+    function closeLightbox() {
+      lightbox.classList.remove('open'); document.body.style.overflow = '';
+      const v = lbInner.querySelector('video'); if (v) { v.pause(); v.remove(); }
+      const i = lbInner.querySelector('img'); if (i) i.remove();
+    }
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+</body>
+</html>
