@@ -43,31 +43,12 @@
     #hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding-top: 5rem; overflow: hidden; }
     .dot-grid { position: absolute; inset: 0; pointer-events: none; z-index: 0; background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 24px 24px; mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, #000 40%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, #000 40%, transparent 100%); }
     .glow-sphere { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%); top: 30%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; z-index: 0; }
-    .hero-wrapper {
-      position: relative; z-index: 1;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: center;
-      min-height: calc(100vh - 5rem);
-    }
-    .hero-text {
-      text-align: left;
-      padding: 3rem 0;
-    }
+    .hero-wrapper { position: relative; z-index: 1; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; min-height: calc(100vh - 5rem); }
+    .hero-text { text-align: left; padding: 3rem 0; }
     .hero-text .badge { margin-bottom: 1.5rem; }
-    .hero-model-side {
-      position: relative;
-      height: 100vh;
-      max-height: 900px;
-      min-height: 600px;
-      display: flex;
-      align-items: stretch;
-    }
+    .hero-model-side { position: relative; height: 100vh; max-height: 900px; min-height: 600px; display: flex; align-items: stretch; }
     .hero-headline { font-family: var(--font-display); font-size: clamp(2.2rem,4.5vw,4.2rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.035em; margin-bottom: 1.5rem; }
     .hero-headline em { font-style: normal; font-weight: 800; background: linear-gradient(135deg,#a5b4fc 0%,#6366f1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
     .hero-model-container { width: 100%; height: 100%; position: relative; display: flex; justify-content: center; align-items: center; z-index: 5; cursor: grab; }
     .hero-model-container:active { cursor: grabbing; }
     #heroModelCanvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; outline: none; display: block; }
@@ -77,7 +58,6 @@
     .model-hint.visible { opacity: 1; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .animate-spin { animation: spin 1s linear infinite; }
-
     .hero-sub { font-size: 1.05rem; font-weight: 300; color: var(--text-muted); max-width: 480px; margin: 0 0 2.5rem; }
     .hero-buttons { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; }
     .btn { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; font-weight: 600; padding: 0.75rem 1.5rem; border-radius: 8px; transition: all 0.2s cubic-bezier(0.16,1,0.3,1); }
@@ -199,7 +179,7 @@
 
   <nav id="nav">
     <div class="container nav-container">
-      <a href="#" class="nav-logo">Lumen<span> </span>Visuals Studio</a>
+      <a href="#" class="nav-logo">Lumen<span>.</span>Visuals Studio</a>
       <ul class="nav-menu">
         <li><a href="#features">Capabilities</a></li>
         <li><a href="#portfolio">Work</a></li>
@@ -218,8 +198,6 @@
     <div class="glow-sphere"></div>
     <div class="container" style="width:100%;max-width:100%;padding:0 3rem;">
       <div class="hero-wrapper">
-
-        <!-- LEFT: text -->
         <div class="hero-text">
           <span class="badge reveal">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
@@ -238,8 +216,6 @@
             </div>
           </div>
         </div>
-
-        <!-- RIGHT: 3D model -->
         <div class="hero-model-side">
           <div class="hero-model-container reveal" id="heroModelContainer">
             <div class="model-loader" id="modelLoader">
@@ -253,7 +229,6 @@
             <div class="model-hint" id="modelHint">Drag to rotate &nbsp;·&nbsp; Scroll to spin</div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -306,11 +281,11 @@
       <div class="portfolio-grid" id="portfolioGrid">
         <div class="portfolio-item reveal" data-cat="product"><img src="assets/jbl_edited.webp" alt="JBL Headphones" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">JBL Headphones</div></div></div>
         <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/volvo1.webp" alt="Volvo S90" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90</div></div></div>
-        <div class="portfolio-item reveal" data-cat="product"><img src="assets/insta_exploded_view.webp" alt="insta360 Exploded" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">insta360 Exploded view</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="assets/insta_exploded_view.webp" alt="Insta360 Exploded" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Insta360 Exploded view</div></div></div>
         <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/volvo2.webp" alt="Volvo S90" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90</div></div></div>
-        <div class="portfolio-item reveal" data-cat="product"><img src="assets/insta360_hero_image.webp" alt="insta360 Hero" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">insta360 Hero Image</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="assets/insta360_hero_image.webp" alt="Insta360 Hero" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Insta360 Hero Image</div></div></div>
         <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/volvo3.webp" alt="Volvo S90" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90</div></div></div>
-        <div class="portfolio-item reveal" data-cat="product"><img src="assets/insta360_ice.webp" alt="insta360" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">insta360</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="assets/insta360_ice.webp" alt="Insta360" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Insta360</div></div></div>
         <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/volvo4.webp" alt="Volvo S90 Interiors" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90 Interiors</div></div></div>
         <div class="portfolio-item reveal" data-cat="product"><img src="assets/redbull1.webp" alt="Red Bull" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Red Bull</div></div></div>
         <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/volvo5.webp" alt="Volvo S90 Interiors" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90 Interiors</div></div></div>
@@ -319,13 +294,13 @@
         <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/porche1.webp" alt="Porsche GT3" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Porsche GT3</div></div></div>
         <div class="portfolio-item reveal" data-cat="product"><img src="assets/pen.webp" alt="Shadowskin Pen" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Shadowskin Pen</div></div></div>
         <div class="portfolio-item reveal" data-cat="product"><img src="assets/lancaster.webp" alt="Lancaster Cream" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Lancaster Cream</div></div></div>
-        <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/insta360.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">insta360</div></div></div>
+        <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/insta360.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Insta360</div></div></div>
         <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/porchevideo1.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Porsche GT3</div></div></div>
         <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/esteevideo.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Estee Lauder</div></div></div>
         <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/volvovideo.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Volvo S90</div></div></div>
         <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/redbull_video.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Red Bull</div></div></div>
         <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/porche_video2.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Porsche Cinematic</div></div></div>
-        <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/lancaster cream (spec).mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Lancaster Motion</div></div></div>
+        <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/lancaster_cream_spec.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Lancaster Motion</div></div></div>
         <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/energy_drink.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Energy Drink Showcase</div></div></div>
         <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/shadowskin.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Shadowskin Sequence</div></div></div>
       </div>
@@ -464,7 +439,7 @@
 
   <footer>
     <div class="container footer-layout">
-      <div class="nav-logo">Lumen<span> </span>Visuals Studio</div>
+      <div class="nav-logo">Lumen<span>.</span>Visuals Studio</div>
       <div class="footer-credits">&copy; 2026 Lumen Visuals Studio. All rights reserved.</div>
     </div>
   </footer>
@@ -475,12 +450,6 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════
-       THREE.JS — iPhone 3D Model with material override
-       The GLB geometry is perfect; its Blender procedural
-       materials don't export, so we re-apply them here
-       using the exact PBR values from the GLB data.
-  ════════════════════════════════════════════════════ -->
   <script type="importmap">
   {
     "imports": {
@@ -493,6 +462,7 @@
   <script type="module">
     import * as THREE        from 'three';
     import { GLTFLoader }    from 'three/addons/loaders/GLTFLoader.js';
+    import { DRACOLoader }   from 'three/addons/loaders/DRACOLoader.js';
     import { RGBELoader }    from 'three/addons/loaders/RGBELoader.js';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -502,7 +472,6 @@
     const loaderText = document.getElementById('loaderText');
     const hintEl     = document.getElementById('modelHint');
 
-    // ── Renderer ──────────────────────────────────────
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping         = THREE.ACESFilmicToneMapping;
@@ -522,7 +491,6 @@
     onResize();
     new ResizeObserver(onResize).observe(container);
 
-    // ── OrbitControls (drag to inspect, zoom) ─────────
     const controls = new OrbitControls(camera, canvas);
     controls.enableDamping   = true;
     controls.dampingFactor   = 0.06;
@@ -531,36 +499,25 @@
     controls.maxDistance     = 5.0;
     controls.minPolarAngle   = Math.PI * 0.2;
     controls.maxPolarAngle   = Math.PI * 0.8;
-    controls.autoRotate      = false; // rotation driven by scroll only
+    controls.autoRotate      = false;
 
-    // ── Scroll-driven rotation ────────────────────────
-    // scrolling down → rotate right (+Y), up → rotate left (-Y)
-    let scrollTarget  = 0;
-    let scrollCurrent = 0;
-    let lastScrollY   = window.scrollY;
-
+    let scrollTarget = 0, scrollCurrent = 0, lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
       const delta   = window.scrollY - lastScrollY;
-      scrollTarget += delta * 0.002;   // ← strength: small = subtle
+      scrollTarget += delta * 0.002;
       lastScrollY   = window.scrollY;
     }, { passive: true });
 
-    // ── Render loop ───────────────────────────────────
     function tick() {
       requestAnimationFrame(tick);
-
-      // Ease scroll rotation to target (smooth deceleration)
       scrollCurrent += (scrollTarget - scrollCurrent) * 0.06;
-
       const pivot = scene.children.find(c => c.isGroup);
-      if (pivot) {
-        pivot.rotation.y = scrollCurrent;
-      }
-
+      if (pivot) pivot.rotation.y = scrollCurrent;
       controls.update();
       renderer.render(scene, camera);
     }
     tick();
+
     new RGBELoader().load(
       'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_08_1k.hdr',
       hdr => {
@@ -570,26 +527,26 @@
       }
     );
 
-    // Key light — slight cool-blue tint matching site accent
     const key = new THREE.DirectionalLight(0xc0c8ff, 2.0);
     key.position.set(4, 6, 4);
     scene.add(key);
-    // Warm rim from behind
     const rim = new THREE.DirectionalLight(0xfff0e0, 0.6);
     rim.position.set(-3, 2, -4);
     scene.add(rim);
     scene.add(new THREE.AmbientLight(0xffffff, 0.2));
 
-    // ── Load GLB ───────────────────────────────────────
-    new GLTFLoader().load(
-      'assets/iphone.glb',
+    // ── DRACOLoader: required for Draco-compressed GLBs ──
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/libs/draco/');
 
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.setDRACOLoader(dracoLoader);
+
+    gltfLoader.load(
+      'assets/iphone.glb',
       gltf => {
         const model = gltf.scene;
 
-        // Auto-centre & scale
-        // Fix: 'LED DISPLAY' baked as metalness=1 which hides base colour textures.
-        // Override just that material's metalness so the baked screen texture shows.
         model.traverse(node => {
           if (!node.isMesh) return;
           const mats = Array.isArray(node.material) ? node.material : [node.material];
@@ -602,46 +559,36 @@
           });
         });
 
-        // Auto-centre & scale the inner model
         const box    = new THREE.Box3().setFromObject(model);
         const size   = box.getSize(new THREE.Vector3());
         const centre = box.getCenter(new THREE.Vector3());
         model.position.sub(centre);
         model.scale.setScalar(1.5 / Math.max(size.x, size.y, size.z));
-
-        // Nodes have a baked 90° X rotation, phone lies in XZ plane.
-        // Rotate X by -90° to stand it upright (Y becomes tall axis).
         model.rotation.set(-Math.PI / 2, Math.PI * 0.12, 0);
 
-        // Wrap in pivot group — all scroll rotation happens on this
         const pivot = new THREE.Group();
         pivot.add(model);
         scene.add(pivot);
 
         loaderEl.classList.add('hidden');
-        setTimeout(() => hintEl.classList.add('visible'),   800);
+        setTimeout(() => hintEl.classList.add('visible'),    800);
         setTimeout(() => hintEl.classList.remove('visible'), 4500);
       },
-
       xhr => {
-        if (xhr.total) loaderText.textContent = `Loading… ${Math.round(xhr.loaded/xhr.total*100)}%`;
+        if (xhr.total) loaderText.textContent = `Loading… ${Math.round(xhr.loaded / xhr.total * 100)}%`;
       },
-
       err => {
         console.error('GLB error:', err);
         loaderText.textContent = 'Failed to load model';
       }
     );
-
   </script>
 
   <script>
-    // NAV SCROLL
     window.addEventListener('scroll', () => {
       document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // SCROLL REVEAL
     if ('IntersectionObserver' in window) {
       const obs = new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
@@ -651,7 +598,6 @@
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
     }
 
-    // VIDEO LAZY LOAD
     const vObs = new IntersectionObserver(entries => {
       entries.forEach(e => {
         const v = e.target;
@@ -663,7 +609,6 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('video[data-src]').forEach(v => vObs.observe(v));
 
-    // PORTFOLIO FILTER
     const filters = document.querySelectorAll('.filter-btn');
     const items   = document.querySelectorAll('.portfolio-item');
     filters.forEach(btn => btn.addEventListener('click', () => {
@@ -673,7 +618,6 @@
       items.forEach(item => item.style.display = (f === 'all' || item.dataset.cat === f) ? 'block' : 'none');
     }));
 
-    // FAQ
     document.querySelectorAll('.faq-trigger').forEach(btn => btn.addEventListener('click', () => {
       const parent = btn.parentElement, content = btn.nextElementSibling;
       const wasActive = parent.classList.contains('active');
@@ -681,7 +625,6 @@
       if (!wasActive) { parent.classList.add('active'); content.style.maxHeight = content.scrollHeight + 'px'; }
     }));
 
-    // LIGHTBOX
     const lightbox = document.getElementById('lightbox');
     const lbInner  = document.getElementById('lightboxInner');
     const closeBtn = document.getElementById('lightboxClose');
