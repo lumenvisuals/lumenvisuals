@@ -537,7 +537,8 @@
 
     // ── DRACOLoader: required for Draco-compressed GLBs ──
     const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/libs/draco/');
+    // Switched to Google's official, highly reliable, and CORS-configured CDN for Draco decoders
+    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
 
     const gltfLoader = new GLTFLoader();
     gltfLoader.setDRACOLoader(dracoLoader);
