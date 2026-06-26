@@ -476,8 +476,12 @@
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping         = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 2.0; 
+    renderer.toneMappingExposure = 1.0; // Lowered from 2.0 to preserve dynamic range
     renderer.outputColorSpace    = THREE.SRGBColorSpace;
+
+    // Enable soft contact shadows
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type    = THREE.PCFSoftShadowMap;
 
     const scene  = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 100);
@@ -523,38 +527,35 @@
     }
     tick();
 
+    // Softened Environment HDR Light
     new EXRLoader().load(
       'assets/mirrored_hall_4k.exr',
       hdr => {
         hdr.mapping = THREE.EquirectangularReflectionMapping;
         scene.environment = hdr;
-        scene.environmentIntensity = 1.8; // Set high environmental reflection intensity for crisp metal highlights
+        scene.environmentIntensity = 1.0; // Reduced from 1.8 to avoid washing out textures
       }
     );
 
-    // Dynamic High-Contrast Studio Lighting Rig
-    const key = new THREE.DirectionalLight(0xffffff, 4.0); // Strong front-right key light
-    key.position.set(6, 6, 4);
-    scene.add(key);
+    // Rebalanced Studio Lighting Rig
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.2); // Softened from 4.0
+    keyLight.position.set(5, 8, 5);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 2048;
+    keyLight.shadow.mapSize.height = 2048;
+    keyLight.shadow.bias = -0.0001;
+    keyLight.shadow.normalBias = 0.02;
+    scene.add(keyLight);
 
-    const fill = new THREE.DirectionalLight(0x8cb1f5, 1.5); // Cool-toned bottom-left fill light
-    fill.position.set(-6, -2, 4);
-    scene.add(fill);
+    const fillLight = new THREE.DirectionalLight(0x8cb1f5, 0.6); // Cool-toned bottom-left fill
+    fillLight.position.set(-6, 2, 2);
+    scene.add(fillLight);
 
-    // Dual-Rim Back Lights to trace outlines and create strong background separation
-    const leftRim = new THREE.DirectionalLight(0xffffff, 6.0); // Extremely strong back-left rim light
-    leftRim.position.set(-5, 3, -5); 
-    scene.add(leftRim);
+    const rimLight = new THREE.DirectionalLight(0xffffff, 1.2); // Strong highlight rim
+    rimLight.position.set(-2, 4, -6); 
+    scene.add(rimLight);
 
-    const rightRim = new THREE.DirectionalLight(0xffffff, 5.0); // Strong back-right rim light
-    rightRim.position.set(5, 1, -5); 
-    scene.add(rightRim);
-
-    const topRim = new THREE.DirectionalLight(0xffffff, 3.0); // Top-back highlight for strap edge curvature
-    topRim.position.set(0, 8, -2);
-    scene.add(topRim);
-
-    scene.add(new THREE.AmbientLight(0x0c0f1d, 0.5)); // Deep blue ambient fill to lift pitch-black shadows
+    scene.add(new THREE.AmbientLight(0x0c0f1d, 0.15)); // Deep blue ambient fill to lift pitch-black shadows gently
 
     // ── DRACOLoader: required for Draco-compressed GLBs ──
     const dracoLoader = new DRACOLoader();
@@ -575,25 +576,68 @@
           node.receiveShadow = true;
 
           const mats = Array.isArray(node.material) ? node.material : [node.material];
-          mats.forEach(mat => {
-            // LED display panel config
-            if (mat.name && mat.name.trim() === 'LED DISPLAY') {
-              mat.metalness = 0.0;
-              mat.roughness = 0.1;
-              mat.needsUpdate = true;
+          mats.forEach((mat, index) => {
+            if (!mat) return;
+
+            // Upgrade standard materials to MeshPhysicalMaterial for clearcoat and sheen properties
+            let physicalMat = mat;
+            if (mat.isMeshStandardMaterial && !mat.isMeshPhysicalMaterial) {
+              physicalMat = new THREE.MeshPhysicalMaterial().copy(mat);
+              if (Array.isArray(node.material)) {
+                node.material[index] = physicalMat;
+              } else {
+                node.material = physicalMat;
+              }
             }
-            // Enhance shiny metals (silver casing, bezel, buckles)
-            if (mat.name && (mat.name.toLowerCase().includes('metal') || mat.name.toLowerCase().includes('chrome') || mat.name.toLowerCase().includes('silver') || mat.name.toLowerCase().includes('case') || mat.name.toLowerCase().includes('steel'))) {
-              mat.metalness = 1.0;
-              mat.roughness = 0.12;
-              mat.needsUpdate = true;
+
+            const name = physicalMat.name ? physicalMat.name.toLowerCase() : '';
+
+            // 1. Screens, Glass & Displays
+            if (name.includes('display') || name.includes('glass') || name.includes('screen') || name.includes('lens') || name.includes('led')) {
+              physicalMat.roughness = 0.05;
+              physicalMat.metalness = 0.1;
+              physicalMat.clearcoat = 1.0; 
+              physicalMat.clearcoatRoughness = 0.03;
+              
+              if (name.includes('glass')) {
+                physicalMat.transmission = 0.9; // Adds realistic glass light refraction
+                physicalMat.thickness = 0.5;
+                physicalMat.transparent = true;
+              }
             }
-            // Soften matte components (silicone/rubber strap)
-            if (mat.name && (mat.name.toLowerCase().includes('strap') || mat.name.toLowerCase().includes('rubber') || mat.name.toLowerCase().includes('silicone') || mat.name.toLowerCase().includes('band') || mat.name.toLowerCase().includes('purple'))) {
-              mat.metalness = 0.05;
-              mat.roughness = 0.55;
-              mat.needsUpdate = true;
+            // 2. Brushed & Polished Metals (casing, bezel, buckles, steel details)
+            else if (
+              name.includes('metal') || 
+              name.includes('chrome') || 
+              name.includes('silver') || 
+              name.includes('case') || 
+              name.includes('steel') || 
+              name.includes('aluminum') || 
+              name.includes('gold') || 
+              name.includes('titanium')
+            ) {
+              physicalMat.metalness = 1.0;
+              physicalMat.roughness = 0.22; // Slightly textured to diffuse reflections organically
+              physicalMat.clearcoat = 0.4;  // Soft polished layer on metal surfaces
+              physicalMat.clearcoatRoughness = 0.1;
             }
+            // 3. Matte, Rubber, and Silicone Materials (straps, chassis details, soft textures)
+            else if (
+              name.includes('strap') || 
+              name.includes('rubber') || 
+              name.includes('silicone') || 
+              name.includes('band') || 
+              name.includes('plastic') || 
+              name.includes('body') ||
+              name.includes('purple')
+            ) {
+              physicalMat.metalness = 0.0;
+              physicalMat.roughness = 0.65;
+              physicalMat.sheen = 0.6; // Soft, physical velvet-like scattering for rubbery materials
+              physicalMat.sheenRoughness = 0.4;
+            }
+
+            physicalMat.needsUpdate = true;
           });
         });
 
@@ -610,7 +654,7 @@
         const centre = box2.getCenter(new THREE.Vector3());
         pivot.position.sub(centre);
 
-        // Rotating the model to face front-left (exposing watch case buttons to the right, matching Screenshot 2)
+        // Rotating the model to face front-left
         model.rotation.set(0, -Math.PI * 0.2, 0);
 
         pivotRef = pivot;
