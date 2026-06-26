@@ -463,9 +463,7 @@
     import * as THREE        from 'three';
     import { GLTFLoader }    from 'three/addons/loaders/GLTFLoader.js';
     import { DRACOLoader }   from 'three/addons/loaders/DRACOLoader.js';
-    import { RGBELoader }    from 'three/addons/loaders/RGBELoader.js';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-
     import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 
     const canvas     = document.getElementById('heroModelCanvas');
@@ -482,7 +480,7 @@
 
     const scene  = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 100);
-    camera.position.set(0, 0.05, 2.8);
+    camera.position.set(0, 0, 2.0);  // closer = bigger model on screen
 
     function onResize() {
       const w = container.clientWidth, h = container.clientHeight;
@@ -497,45 +495,35 @@
     controls.enableDamping   = true;
     controls.dampingFactor   = 0.06;
     controls.enablePan       = false;
-    controls.minDistance     = 1.4;
-    controls.maxDistance     = 5.0;
+    controls.target.set(0, 0, 0);    // always orbit around true centre
+    controls.minDistance     = 0.8;
+    controls.maxDistance     = 3.5;
     controls.minPolarAngle   = Math.PI * 0.2;
     controls.maxPolarAngle   = Math.PI * 0.8;
     controls.autoRotate      = false;
+    controls.update();
 
-    let scrollTarget = 0, scrollCurrent = 0, lastScrollY = window.scrollY;
+    let pivotRef = null;
+    let scrollDelta = 0;
+    let lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
-      const delta   = window.scrollY - lastScrollY;
-      scrollTarget += delta * 0.002;
-      lastScrollY   = window.scrollY;
+      const delta = window.scrollY - lastScrollY;
+      scrollDelta += delta * 0.0005;
+      lastScrollY  = window.scrollY;
     }, { passive: true });
 
     function tick() {
       requestAnimationFrame(tick);
-      scrollCurrent += (scrollTarget - scrollCurrent) * 0.06;
-      const pivot = scene.children.find(c => c.isGroup);
-      if (pivot) pivot.rotation.y = scrollCurrent;
+      if (pivotRef && Math.abs(scrollDelta) > 0.0001) {
+        pivotRef.rotation.y += scrollDelta;
+        scrollDelta *= 0.85; // decay
+      }
       controls.update();
       renderer.render(scene, camera);
     }
     tick();
 
-    new RGBELoader().load(
-      'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_08_1k.hdr',
-      hdr => {
-        hdr.mapping = THREE.EquirectangularReflectionMapping;
-        scene.environment = hdr;
-        scene.environmentIntensity = 1.0;
-      }
-    );
-
-    const key = new THREE.DirectionalLight(0xc0c8ff, 2.0);
-    key.position.set(4, 6, 4);
-    scene.add(key);
-    const rim = new THREE.DirectionalLight(0xfff0e0, 0.6);
-    rim.position.set(-3, 2, -4);
-    scene.add(rim);
-    scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+    // No lights — relying on baked lighting in GLB materials
 
     // ── DRACOLoader: required for Draco-compressed GLBs ──
     const dracoLoader = new DRACOLoader();
@@ -562,16 +550,26 @@
           });
         });
 
-        const box    = new THREE.Box3().setFromObject(model);
-        const size   = box.getSize(new THREE.Vector3());
-        const centre = box.getCenter(new THREE.Vector3());
-        model.position.sub(centre);
-        model.scale.setScalar(1.5 / Math.max(size.x, size.y, size.z));
-        model.rotation.set(-Math.PI / 2, Math.PI * 0.12, 0);
-
+        // Add model to pivot first
         const pivot = new THREE.Group();
         pivot.add(model);
         scene.add(pivot);
+
+        // Scale to fit viewport
+        const box1  = new THREE.Box3().setFromObject(pivot);
+        const size1 = box1.getSize(new THREE.Vector3());
+        const scale = 1.8 / Math.max(size1.x, size1.y, size1.z);
+        pivot.scale.setScalar(scale);
+
+        // Re-centre after scaling so pivot origin = geometric centre
+        const box2   = new THREE.Box3().setFromObject(pivot);
+        const centre = box2.getCenter(new THREE.Vector3());
+        pivot.position.sub(centre);
+
+        // Slight angle for drama
+        model.rotation.set(0, Math.PI * 0.15, 0);
+
+        pivotRef = pivot;
 
         loaderEl.classList.add('hidden');
         setTimeout(() => hintEl.classList.add('visible'),    800);
