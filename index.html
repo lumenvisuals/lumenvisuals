@@ -481,7 +481,7 @@
 
     const scene  = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 100);
-    camera.position.set(0, 0, 2.0);  // closer = bigger model on screen
+    camera.position.set(0, 0, 2.4);  // Adjust from 2.0 to 2.4 to zoom out the model
 
     function onResize() {
       const w = container.clientWidth, h = container.clientHeight;
@@ -529,17 +529,17 @@
       hdr => {
         hdr.mapping = THREE.EquirectangularReflectionMapping;
         scene.environment = hdr;
-        scene.environmentIntensity = 0.6;
+        scene.environmentIntensity = 0.8; // Increased from 0.6 to 0.8
       }
     );
 
-    const key = new THREE.DirectionalLight(0xffffff, 0.8);
+    const key = new THREE.DirectionalLight(0xffffff, 1.1); // Increased from 0.8 to 1.1
     key.position.set(4, 6, 4);
     scene.add(key);
-    const rim = new THREE.DirectionalLight(0xffffff, 0.3);
+    const rim = new THREE.DirectionalLight(0xffffff, 0.5); // Increased from 0.3 to 0.5
     rim.position.set(-3, 2, -4);
     scene.add(rim);
-    scene.add(new THREE.AmbientLight(0xffffff, 0.1));
+    scene.add(new THREE.AmbientLight(0xffffff, 0.15)); // Increased from 0.1 to 0.15
 
     // ── DRACOLoader: required for Draco-compressed GLBs ──
     const dracoLoader = new DRACOLoader();
