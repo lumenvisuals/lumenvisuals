@@ -463,7 +463,7 @@
     import * as THREE        from 'three';
     import { GLTFLoader }    from 'three/addons/loaders/GLTFLoader.js';
     import { DRACOLoader }   from 'three/addons/loaders/DRACOLoader.js';
-    import { RGBELoader }    from 'three/addons/loaders/RGBELoader.js';
+    import { EXRLoader }     from 'three/addons/loaders/EXRLoader.js';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
     import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 
@@ -524,22 +524,22 @@
     }
     tick();
 
-    new RGBELoader().load(
-      'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_08_1k.hdr',
+    new EXRLoader().load(
+      'assets/mirrored_hall_4k.exr',
       hdr => {
         hdr.mapping = THREE.EquirectangularReflectionMapping;
         scene.environment = hdr;
-        scene.environmentIntensity = 1.0;
+        scene.environmentIntensity = 0.6;
       }
     );
 
-    const key = new THREE.DirectionalLight(0xc0c8ff, 2.0);
+    const key = new THREE.DirectionalLight(0xffffff, 0.8);
     key.position.set(4, 6, 4);
     scene.add(key);
-    const rim = new THREE.DirectionalLight(0xfff0e0, 0.6);
+    const rim = new THREE.DirectionalLight(0xffffff, 0.3);
     rim.position.set(-3, 2, -4);
     scene.add(rim);
-    scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+    scene.add(new THREE.AmbientLight(0xffffff, 0.1));
 
     // ── DRACOLoader: required for Draco-compressed GLBs ──
     const dracoLoader = new DRACOLoader();
