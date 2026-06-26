@@ -496,7 +496,7 @@
     controls.enableDamping   = true;
     controls.dampingFactor   = 0.06;
     controls.enablePan       = false;
-    controls.enableZoom      = false; // Disabled zooming functionality
+    controls.enableZoom      = false; // Disabled zooming
     controls.target.set(0, 0, 0);    
     controls.minPolarAngle   = Math.PI * 0.2;
     controls.maxPolarAngle   = Math.PI * 0.8;
@@ -528,24 +528,33 @@
       hdr => {
         hdr.mapping = THREE.EquirectangularReflectionMapping;
         scene.environment = hdr;
-        scene.environmentIntensity = 1.5; 
+        scene.environmentIntensity = 1.8; // Set high environmental reflection intensity for crisp metal highlights
       }
     );
 
-    const key = new THREE.DirectionalLight(0xffffff, 2.5); 
-    key.position.set(4, 6, 4);
+    // Dynamic High-Contrast Studio Lighting Rig
+    const key = new THREE.DirectionalLight(0xffffff, 4.0); // Strong front-right key light
+    key.position.set(6, 6, 4);
     scene.add(key);
 
-    const rim = new THREE.DirectionalLight(0xffffff, 1.2); 
-    rim.position.set(-3, 2, -4);
-    scene.add(rim);
+    const fill = new THREE.DirectionalLight(0x8cb1f5, 1.5); // Cool-toned bottom-left fill light
+    fill.position.set(-6, -2, 4);
+    scene.add(fill);
 
-    // Added a dedicated back rim light pointing forward to create separation from the dark background
-    const backRim = new THREE.DirectionalLight(0xffffff, 3.5);
-    backRim.position.set(0, 1, -5); 
-    scene.add(backRim);
+    // Dual-Rim Back Lights to trace outlines and create strong background separation
+    const leftRim = new THREE.DirectionalLight(0xffffff, 6.0); // Extremely strong back-left rim light
+    leftRim.position.set(-5, 3, -5); 
+    scene.add(leftRim);
 
-    scene.add(new THREE.AmbientLight(0xffffff, 0.4)); 
+    const rightRim = new THREE.DirectionalLight(0xffffff, 5.0); // Strong back-right rim light
+    rightRim.position.set(5, 1, -5); 
+    scene.add(rightRim);
+
+    const topRim = new THREE.DirectionalLight(0xffffff, 3.0); // Top-back highlight for strap edge curvature
+    topRim.position.set(0, 8, -2);
+    scene.add(topRim);
+
+    scene.add(new THREE.AmbientLight(0x0c0f1d, 0.5)); // Deep blue ambient fill to lift pitch-black shadows
 
     // ── DRACOLoader: required for Draco-compressed GLBs ──
     const dracoLoader = new DRACOLoader();
@@ -562,11 +571,27 @@
 
         model.traverse(node => {
           if (!node.isMesh) return;
+          node.castShadow = true;
+          node.receiveShadow = true;
+
           const mats = Array.isArray(node.material) ? node.material : [node.material];
           mats.forEach(mat => {
+            // LED display panel config
             if (mat.name && mat.name.trim() === 'LED DISPLAY') {
-              mat.metalness = 0;
-              mat.roughness = 0.15;
+              mat.metalness = 0.0;
+              mat.roughness = 0.1;
+              mat.needsUpdate = true;
+            }
+            // Enhance shiny metals (silver casing, bezel, buckles)
+            if (mat.name && (mat.name.toLowerCase().includes('metal') || mat.name.toLowerCase().includes('chrome') || mat.name.toLowerCase().includes('silver') || mat.name.toLowerCase().includes('case') || mat.name.toLowerCase().includes('steel'))) {
+              mat.metalness = 1.0;
+              mat.roughness = 0.12;
+              mat.needsUpdate = true;
+            }
+            // Soften matte components (silicone/rubber strap)
+            if (mat.name && (mat.name.toLowerCase().includes('strap') || mat.name.toLowerCase().includes('rubber') || mat.name.toLowerCase().includes('silicone') || mat.name.toLowerCase().includes('band') || mat.name.toLowerCase().includes('purple'))) {
+              mat.metalness = 0.05;
+              mat.roughness = 0.55;
               mat.needsUpdate = true;
             }
           });
@@ -585,7 +610,8 @@
         const centre = box2.getCenter(new THREE.Vector3());
         pivot.position.sub(centre);
 
-        model.rotation.set(0, Math.PI * 0.15, 0);
+        // Rotating the model to face front-left (exposing watch case buttons to the right, matching Screenshot 2)
+        model.rotation.set(0, -Math.PI * 0.2, 0);
 
         pivotRef = pivot;
 
