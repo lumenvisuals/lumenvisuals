@@ -88,7 +88,10 @@
     .filter-btn:hover { color: var(--text); border-color: var(--border-hover); }
     .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
     .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap: 1.5rem; }
-    .portfolio-item { position: relative; border-radius: 10px; overflow: hidden; background: var(--surface); border: 1px solid var(--border); cursor: pointer; aspect-ratio: 4/3; }
+    
+    .portfolio-item { display: none; position: relative; border-radius: 10px; overflow: hidden; background: var(--surface); border: 1px solid var(--border); cursor: pointer; aspect-ratio: 4/3; }
+    .portfolio-item[data-cat="product"] { display: block; }
+
     .portfolio-item img, .portfolio-item video { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
     .portfolio-item:hover img, .portfolio-item:hover video { transform: scale(1.03); }
     .portfolio-meta { position: absolute; inset: 0; background: linear-gradient(to top, rgba(3,7,18,0.9) 0%, rgba(3,7,18,0.2) 60%, transparent 100%); opacity: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; transition: opacity 0.3s ease; }
@@ -273,27 +276,27 @@
         <p class="section-desc">Interactive product visuals and conceptual automotive scenes generated entirely in 3D spaces.</p>
       </div>
       <div class="portfolio-filters reveal">
-        <button class="filter-btn active" data-filter="all">All Assets</button>
-        <button class="filter-btn" data-filter="product">Products</button>
+        <button class="filter-btn active" data-filter="product">Products</button>
         <button class="filter-btn" data-filter="automotive">Automotive</button>
         <button class="filter-btn" data-filter="video">Animations</button>
       </div>
       <div class="portfolio-grid" id="portfolioGrid">
-        <div class="portfolio-item reveal" data-cat="product"><img src="assets/jbl_edited.webp" alt="JBL Headphones" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">JBL Headphones</div></div></div>
-        <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/volvo1.webp" alt="Volvo S90" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90</div></div></div>
-        <div class="portfolio-item reveal" data-cat="product"><img src="assets/insta_exploded_view.webp" alt="Insta360 Exploded" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Insta360 Exploded view</div></div></div>
-        <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/volvo2.webp" alt="Volvo S90" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90</div></div></div>
-        <div class="portfolio-item reveal" data-cat="product"><img src="assets/insta360_hero_image.webp" alt="Insta360 Hero" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Insta360 Hero Image</div></div></div>
-        <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/volvo3.webp" alt="Volvo S90" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90</div></div></div>
-        <div class="portfolio-item reveal" data-cat="product"><img src="assets/insta360_ice.webp" alt="Insta360" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Insta360</div></div></div>
-        <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/volvo4.webp" alt="Volvo S90 Interiors" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90 Interiors</div></div></div>
-        <div class="portfolio-item reveal" data-cat="product"><img src="assets/redbull1.webp" alt="Red Bull" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Red Bull</div></div></div>
-        <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/volvo5.webp" alt="Volvo S90 Interiors" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90 Interiors</div></div></div>
-        <div class="portfolio-item reveal" data-cat="product"><img src="assets/estee_lauder.webp" alt="Estee Lauder" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Estee Lauder</div></div></div>
-        <div class="portfolio-item reveal" data-cat="product"><img src="assets/hairdryer2.webp" alt="Airshot Hair Dryer" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Airshot Hair Dryer</div></div></div>
-        <div class="portfolio-item reveal" data-cat="automotive"><img src="assets/porche1.webp" alt="Porsche GT3" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Porsche GT3</div></div></div>
-        <div class="portfolio-item reveal" data-cat="product"><img src="assets/pen.webp" alt="Shadowskin Pen" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Shadowskin Pen</div></div></div>
-        <div class="portfolio-item reveal" data-cat="product"><img src="assets/lancaster.webp" alt="Lancaster Cream" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Lancaster Cream</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E" data-src="assets/jbl_edited.webp" alt="JBL Headphones" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">JBL Headphones</div></div></div>
+        <div class="portfolio-item reveal" data-cat="automotive"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E" data-src="assets/volvo1.webp" alt="Volvo S90" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E" data-src="assets/insta_exploded_view.webp" alt="Insta360 Exploded" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Insta360 Exploded view</div></div></div>
+        <div class="portfolio-item reveal" data-cat="automotive"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E" data-src="assets/volvo2.webp" alt="Volvo S90" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E" data-src="assets/insta360_hero_image.webp" alt="Insta360 Hero" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Insta360 Hero Image</div></div></div>
+        <div class="portfolio-item reveal" data-cat="automotive"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E" data-src="assets/volvo3.webp" alt="Volvo S90" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E" data-src="assets/insta360_ice.webp" alt="Insta360" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Insta360</div></div></div>
+        <div class="portfolio-item reveal" data-cat="automotive"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E" data-src="assets/volvo4.webp" alt="Volvo S90 Interiors" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90 Interiors</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E" data-src="assets/redbull1.webp" alt="Red Bull" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Red Bull</div></div></div>
+        <div class="portfolio-item reveal" data-cat="automotive"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E" data-src="assets/volvo5.webp" alt="Volvo S90 Interiors" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Volvo S90 Interiors</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E" data-src="assets/estee_lauder.webp" alt="Estee Lauder" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Estee Lauder</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E" data-src="assets/hairdryer2.webp" alt="Airshot Hair Dryer" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Airshot Hair Dryer</div></div></div>
+        <div class="portfolio-item reveal" data-cat="automotive"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E" data-src="assets/porche1.webp" alt="Porsche GT3" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Automotive</div><div class="portfolio-title">Porsche GT3</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E" data-src="assets/pen.webp" alt="Shadowskin Pen" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Shadowskin Pen</div></div></div>
+        <div class="portfolio-item reveal" data-cat="product"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3'%3E%3C/svg%3E" data-src="assets/lancaster.webp" alt="Lancaster Cream" loading="lazy" /><div class="portfolio-meta"><div class="portfolio-category">Product</div><div class="portfolio-title">Lancaster Cream</div></div></div>
+        
         <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/insta360.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Insta360</div></div></div>
         <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/porchevideo1.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Porsche GT3</div></div></div>
         <div class="portfolio-item reveal" data-cat="video"><div class="video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><video muted loop playsinline preload="metadata" data-src="assets/esteevideo.mp4"></video><div class="portfolio-meta"><div class="portfolio-category">Animation</div><div class="portfolio-title">Estee Lauder</div></div></div>
@@ -585,7 +588,6 @@
         const centre = box2.getCenter(new THREE.Vector3());
         pivot.position.sub(centre);
 
-        // Modified line: changed Math.PI * 0.15 to -Math.PI * 0.15
         model.rotation.set(0, -Math.PI * 0.15, 0);
 
         pivotRef = pivot;
@@ -618,16 +620,34 @@
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
     }
 
-    const vObs = new IntersectionObserver(entries => {
+    const mediaObs = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        const v = e.target;
+        const el = e.target;
         if (e.isIntersecting) {
-          if (v.dataset.src && !v.src) { v.src = v.dataset.src; v.load(); }
-          v.play().catch(() => {});
-        } else v.pause();
+          if (el.tagName === 'IMG') {
+            if (el.dataset.src && (!el.src || el.src.startsWith('data:'))) {
+              el.src = el.dataset.src;
+            }
+            mediaObs.unobserve(el);
+          }
+          else if (el.tagName === 'VIDEO') {
+            if (el.dataset.src && !el.src) {
+              el.src = el.dataset.src;
+              el.load();
+            }
+            el.play().catch(() => {});
+          }
+        } else {
+          if (el.tagName === 'VIDEO') {
+            el.pause();
+          }
+        }
       });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('video[data-src]').forEach(v => vObs.observe(v));
+    }, { rootMargin: '200px 0px', threshold: 0.01 });
+
+    document.querySelectorAll('.portfolio-item img, .portfolio-item video').forEach(media => {
+      mediaObs.observe(media);
+    });
 
     const filters = document.querySelectorAll('.filter-btn');
     const items   = document.querySelectorAll('.portfolio-item');
@@ -635,7 +655,9 @@
       filters.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const f = btn.dataset.filter;
-      items.forEach(item => item.style.display = (f === 'all' || item.dataset.cat === f) ? 'block' : 'none');
+      items.forEach(item => {
+        item.style.display = (item.dataset.cat === f) ? 'block' : 'none';
+      });
     }));
 
     document.querySelectorAll('.faq-trigger').forEach(btn => btn.addEventListener('click', () => {
@@ -658,7 +680,7 @@
         lbInner.appendChild(c); c.load(); c.play().catch(() => { c.muted = true; c.play().catch(() => {}); });
       } else if (img) {
         const c = document.createElement('img');
-        c.src = img.src; c.style.cssText = 'width:100%;border-radius:8px;'; lbInner.appendChild(c);
+        c.src = img.src || img.dataset.src; c.style.cssText = 'width:100%;border-radius:8px;'; lbInner.appendChild(c);
       }
       lightbox.classList.add('open'); document.body.style.overflow = 'hidden';
     }));
