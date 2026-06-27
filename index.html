@@ -585,7 +585,8 @@
         const centre = box2.getCenter(new THREE.Vector3());
         pivot.position.sub(centre);
 
-        model.rotation.set(0, Math.PI * 0.15, 0);
+        // Modified line: changed Math.PI * 0.15 to -Math.PI * 0.15
+        model.rotation.set(0, -Math.PI * 0.15, 0);
 
         pivotRef = pivot;
 
