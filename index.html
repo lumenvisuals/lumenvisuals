@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Marco Marzico — Premium 3D Visualisation Studio</title>
+  <title>Lumen Visuals Studio — Premium 3D Visualisation Studio</title>
   <meta name="description" content="Cinematic 3D product and automotive animations crafted to bring your brand's vision to life. Experience uncompromised digital art direction and sensory realism." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <script>document.documentElement.classList.replace('no-js', 'js-active');</script>
   <style>
     :root {
@@ -25,7 +25,55 @@
     a { color: inherit; text-decoration: none; transition: all 0.2s ease; }
     button { font-family: inherit; color: inherit; border: none; background: none; cursor: pointer; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-    .badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2); color: var(--accent); padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
+
+    /* Immersive Cycling Background Video Container (TeamAid Aesthetic) */
+    .video-bg-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: -5;
+      overflow: hidden;
+      background: #000;
+    }
+    .bg-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+    .bg-video.active {
+      opacity: 0.80; /* High-visibility backdrop videos */
+    }
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(3, 7, 18, 0.1) 0%, rgba(3, 7, 18, 0.45) 100%);
+      z-index: 1;
+    }
+
+    .badge { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 0.5rem; 
+      background: rgba(99,102,241,0.1); 
+      border: 1px solid rgba(99,102,241,0.2); 
+      color: var(--accent); 
+      padding: 0.35rem 0.85rem; 
+      border-radius: 9999px; 
+      font-size: 0.75rem; 
+      font-weight: 600; 
+      text-transform: uppercase; 
+      letter-spacing: 0.05em; 
+      margin-bottom: 1.5rem; 
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
     .reveal { opacity: 1; transform: none; }
     .js-active .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
     .js-active .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -43,12 +91,25 @@
     #hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding-top: 5rem; overflow: hidden; }
     .dot-grid { position: absolute; inset: 0; pointer-events: none; z-index: 0; background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 24px 24px; mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, #000 40%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, #000 40%, transparent 100%); }
     .glow-sphere { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%); top: 30%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; z-index: 0; }
-    .hero-wrapper { position: relative; z-index: 1; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; min-height: calc(100vh - 5rem); }
+    .hero-wrapper { position: relative; z-index: 2; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; min-height: calc(100vh - 5rem); }
     .hero-text { text-align: left; padding: 3rem 0; }
     .hero-text .badge { margin-bottom: 1.5rem; }
     .hero-model-side { position: relative; height: 100vh; max-height: 900px; min-height: 600px; display: flex; align-items: stretch; }
-    .hero-headline { font-family: var(--font-display); font-size: clamp(2.2rem,4.5vw,4.2rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.035em; margin-bottom: 1.5rem; }
-    .hero-headline em { font-style: normal; font-weight: 800; background: linear-gradient(135deg,#a5b4fc 0%,#6366f1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    
+    .hero-headline { 
+      font-family: var(--font-display); 
+      font-size: clamp(2.2rem,4.5vw,4.2rem); 
+      font-weight: 800; 
+      line-height: 1.08; 
+      letter-spacing: -0.035em; 
+      margin-bottom: 1.5rem; 
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7); 
+    }
+    .hero-headline em { 
+      font-style: normal; 
+      font-weight: 800; 
+      color: var(--accent); /* Standard flat accent color matching active text styles exactly */
+    }
     .hero-model-container { width: 100%; height: 100%; position: relative; display: flex; justify-content: center; align-items: center; z-index: 5; cursor: grab; }
     .hero-model-container:active { cursor: grabbing; }
     #heroModelCanvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; outline: none; display: block; }
@@ -58,19 +119,27 @@
     .model-hint.visible { opacity: 1; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .animate-spin { animation: spin 1s linear infinite; }
-    .hero-sub { font-size: 1.05rem; font-weight: 300; color: var(--text-muted); max-width: 480px; margin: 0 0 2.5rem; }
+    
+    .hero-sub { 
+      font-size: 1.05rem; 
+      font-weight: 300; 
+      color: var(--text-muted); 
+      max-width: 480px; 
+      margin: 0 0 2.5rem; 
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    }
     .hero-buttons { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; }
     .btn { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; font-weight: 600; padding: 0.75rem 1.5rem; border-radius: 8px; transition: all 0.2s cubic-bezier(0.16,1,0.3,1); }
     .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 20px rgba(99,102,241,0.25); }
     .btn-primary:hover { background: #4f46e5; transform: translateY(-1px); }
-    .btn-secondary { background: var(--surface-card); color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary { background: rgba(17, 24, 39, 0.65); color: var(--text); border: 1px solid var(--border); backdrop-filter: blur(4px); }
     .btn-secondary:hover { background: rgba(255,255,255,0.05); border-color: var(--border-hover); }
     .trust-section { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
     .trust-title { font-size: 0.75rem; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
     .trust-logos { display: flex; justify-content: flex-start; align-items: center; gap: 2rem; flex-wrap: wrap; opacity: 0.6; }
-    .trust-logos span { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; color: var(--text-muted); }
+    .trust-logos span { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; color: var(--text-muted); text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
 
-    #features { padding: 7rem 0; border-top: 1px solid var(--border); background: radial-gradient(100% 50% at 50% 100%, rgba(99,102,241,0.03) 0%, transparent 100%); }
+    #features { padding: 7rem 0; border-top: 1px solid var(--border); background: radial-gradient(100% 50% at 50% 100%, rgba(99,102,241,0.03) 0%, transparent 100%); position: relative; z-index: 2; }
     .section-header { text-align: center; max-width: 650px; margin: 0 auto 4rem; }
     .section-title { font-family: var(--font-display); font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; margin-top: 0.5rem; }
     .section-desc { color: var(--text-muted); margin-top: 1rem; }
@@ -82,7 +151,7 @@
     .bento-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
     .col-6 { grid-column: span 6; } .col-4 { grid-column: span 4; } .col-8 { grid-column: span 8; }
 
-    #portfolio { padding: 7rem 0; border-top: 1px solid var(--border); }
+    #portfolio { padding: 7rem 0; border-top: 1px solid var(--border); position: relative; z-index: 2; }
     .portfolio-filters { display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 3rem; flex-wrap: wrap; }
     .filter-btn { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.5rem 1.25rem; border: 1px solid var(--border); border-radius: 6px; color: var(--text-muted); transition: all 0.2s ease; }
     .filter-btn:hover { color: var(--text); border-color: var(--border-hover); }
@@ -100,13 +169,13 @@
     .portfolio-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; }
     .video-badge { position: absolute; top: 1rem; right: 1rem; background: rgba(3,7,18,0.75); border: 1px solid rgba(255,255,255,0.1); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; }
 
-    #process { padding: 7rem 0; background: var(--surface); border-top: 1px solid var(--border); }
+    #process { padding: 7rem 0; background: var(--surface); border-top: 1px solid var(--border); position: relative; z-index: 2; }
     .pipeline-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
     .step-num { font-family: var(--font-display); font-size: 3rem; font-weight: 800; letter-spacing: -0.05em; color: rgba(99,102,241,0.15); line-height: 1; margin-bottom: 1rem; }
     .step-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
     .step-desc { color: var(--text-muted); font-size: 0.9rem; }
 
-    #comparison { padding: 7rem 0; border-top: 1px solid var(--border); }
+    #comparison { padding: 7rem 0; border-top: 1px solid var(--border); position: relative; z-index: 2; }
     .comp-table-wrapper { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 3rem; }
     .comp-table { width: 100%; border-collapse: collapse; text-align: left; }
     .comp-table th, .comp-table td { padding: 1.25rem 2rem; border-bottom: 1px solid var(--border); }
@@ -115,7 +184,7 @@
     .comp-table td:first-child { font-weight: 600; }
     .comp-highlight { color: var(--accent); font-weight: 500; }
 
-    #engagement { padding: 7rem 0; border-top: 1px solid var(--border); }
+    #engagement { padding: 7rem 0; border-top: 1px solid var(--border); position: relative; z-index: 2; }
     .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; }
     .pricing-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem; display: flex; flex-direction: column; position: relative; }
     .pricing-card.popular { border-color: var(--accent); box-shadow: 0 4px 30px rgba(99,102,241,0.1); }
@@ -126,7 +195,7 @@
     .pricing-features li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; }
     .pricing-features svg { color: var(--accent); flex-shrink: 0; margin-top: 0.2rem; }
 
-    #faq { padding: 7rem 0; border-top: 1px solid var(--border); }
+    #faq { padding: 7rem 0; border-top: 1px solid var(--border); position: relative; z-index: 2; }
     .faq-container { max-width: 800px; margin: 3rem auto 0; }
     .faq-item { border-bottom: 1px solid var(--border); }
     .faq-trigger { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; letter-spacing: -0.01em; text-align: left; }
@@ -135,13 +204,13 @@
     .faq-icon-arrow { transition: transform 0.3s ease; }
     .faq-item.active .faq-icon-arrow { transform: rotate(180deg); }
 
-    #about { padding: 7rem 0; background: var(--surface); border-top: 1px solid var(--border); }
+    #about { padding: 7rem 0; background: var(--surface); border-top: 1px solid var(--border); position: relative; z-index: 2; }
     .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
     .about-image img { border-radius: 12px; border: 1px solid var(--border); }
     .about-content h3 { font-family: var(--font-display); font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
     .about-p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.7; }
 
-    #contact { padding: 8rem 0; text-align: center; position: relative; overflow: hidden; border-top: 1px solid var(--border); }
+    #contact { padding: 8rem 0; text-align: center; position: relative; overflow: hidden; border-top: 1px solid var(--border); z-index: 2; }
     .contact-card { background: radial-gradient(100% 100% at 50% 50%, rgba(99,102,241,0.08) 0%, transparent 100%); border: 1px solid var(--border); padding: 5rem 2rem; border-radius: 16px; max-width: 900px; margin: 0 auto; }
     .contact-title { font-family: var(--font-display); font-size: clamp(1.8rem,4vw,3.2rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 1rem; }
     .contact-sub { color: var(--text-muted); max-width: 500px; margin: 0 auto 2.5rem; }
@@ -152,7 +221,7 @@
     .lightbox-close { position: absolute; top: -3rem; right: 0; color: var(--text-muted); font-size: 1.5rem; }
     .lightbox-close:hover { color: var(--text); }
 
-    footer { border-top: 1px solid var(--border); padding: 3rem 0; }
+    footer { border-top: 1px solid var(--border); padding: 3rem 0; position: relative; z-index: 2; }
     .footer-layout { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
     .footer-credits { font-size: 0.85rem; color: var(--text-dim); }
 
@@ -175,14 +244,25 @@
       .comp-table-wrapper { overflow-x: auto; }
       .comp-table th, .comp-table td { padding: 1rem; }
       .hero-model-side { height: 70vw; min-height: 320px; }
+      .contact-card { padding: 4rem 1.5rem; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Background Cycling Video elements -->
+  <div class="video-bg-wrapper">
+    <video class="bg-video active" src="assets/volvovideo.mp4" muted loop playsinline></video>
+    <video class="bg-video" src="assets/insta360.mp4" muted loop playsinline></video>
+    <video class="bg-video" src="assets/esteevideo.mp4" muted loop playsinline></video>
+    <video class="bg-video" src="assets/redbull_video.mp4" muted loop playsinline></video>
+    <div class="video-overlay"></div>
+  </div>
+
   <nav id="nav">
     <div class="container nav-container">
-      <a href="#" class="nav-logo">Lumen<span> </span>Visuals Studio</a>
+      <!-- Match logo text style from screenshot: Lumen.Visuals Studio -->
+      <a href="#" class="nav-logo">Lumen<span>.</span>Visuals Studio</a>
       <ul class="nav-menu">
         <li><a href="#features">Capabilities</a></li>
         <li><a href="#portfolio">Work</a></li>
@@ -206,15 +286,20 @@
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             Artistic Product Storytelling
           </span>
+          <!-- Heading matches the screenshot layout perfectly -->
           <h1 class="hero-headline reveal">Your product,<br /><em>impossible</em> to ignore.</h1>
+          <!-- Subtitle matches screenshot text exactly -->
           <p class="hero-sub reveal">Cinematic 3D animation and lifelike visualization crafted to bring your products to life. Discover how organic motion, textured physics, and curated light play can captivate your audience.</p>
           <div class="hero-buttons reveal">
+            <!-- Button text exactly matches: View the Portfolio -->
             <a href="#portfolio" class="btn btn-primary">View the Portfolio <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+            <!-- Button text exactly matches: Request Consultation -->
             <a href="#contact" class="btn btn-secondary">Request Consultation</a>
           </div>
           <div class="trust-section reveal">
             <p class="trust-title">Partnering with teams across premium industries</p>
             <div class="trust-logos">
+              <!-- Logos exactly match: Automotive, E-Commerce, Electronics, Luxury -->
               <span>Automotive</span><span>E-Commerce</span><span>Electronics</span><span>Luxury</span>
             </div>
           </div>
@@ -499,7 +584,7 @@
     controls.enableDamping   = true;
     controls.dampingFactor   = 0.06;
     controls.enablePan       = false;
-    controls.enableZoom      = false; // Disabled zooming functionality
+    controls.enableZoom      = false; 
     controls.target.set(0, 0, 0);    
     controls.minPolarAngle   = Math.PI * 0.2;
     controls.maxPolarAngle   = Math.PI * 0.8;
@@ -543,14 +628,13 @@
     rim.position.set(-3, 2, -4);
     scene.add(rim);
 
-    // Added a dedicated back rim light pointing forward to create separation from the dark background
+    // Dedicated back rim light
     const backRim = new THREE.DirectionalLight(0xffffff, 3.5);
     backRim.position.set(0, 1, -5); 
     scene.add(backRim);
 
     scene.add(new THREE.AmbientLight(0xffffff, 0.4)); 
 
-    // ── DRACOLoader: required for Draco-compressed GLBs ──
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
 
@@ -558,6 +642,7 @@
     gltfLoader.setDRACOLoader(dracoLoader);
     gltfLoader.setMeshoptDecoder(MeshoptDecoder);
 
+    // Watch GLB model loaded using original local filename path
     gltfLoader.load(
       'assets/iphone.glb',
       gltf => {
@@ -607,10 +692,41 @@
   </script>
 
   <script>
+    // Immersive Video Background Cycle Logic
+    const bgVideos = document.querySelectorAll('.bg-video');
+    let currentVideoIndex = 0;
+
+    function cycleBackgroundVideos() {
+      const currentVideo = bgVideos[currentVideoIndex];
+      currentVideoIndex = (currentVideoIndex + 1) % bgVideos.length;
+      const nextVideo = bgVideos[currentVideoIndex];
+
+      nextVideo.play().then(() => {
+        nextVideo.classList.add('active');
+        currentVideo.classList.remove('active');
+        setTimeout(() => {
+          if (!currentVideo.classList.contains('active')) {
+            currentVideo.pause();
+          }
+        }, 2000);
+      }).catch(err => {
+        console.warn("Background video play was prevented, trying next sequence:", err);
+        currentVideo.classList.remove('active');
+        nextVideo.classList.add('active');
+      });
+    }
+
+    if (bgVideos.length > 0) {
+      bgVideos[0].play().catch(() => {});
+      setInterval(cycleBackgroundVideos, 7500); // Cycles every 7.5 seconds
+    }
+
+    // Scroll Nav logic
     window.addEventListener('scroll', () => {
       document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
     });
 
+    // Intersection Reveal logic
     if ('IntersectionObserver' in window) {
       const obs = new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
@@ -620,6 +736,7 @@
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
     }
 
+    // Media lazy loading logic
     const mediaObs = new IntersectionObserver(entries => {
       entries.forEach(e => {
         const el = e.target;
@@ -649,6 +766,7 @@
       mediaObs.observe(media);
     });
 
+    // Portfolio filters logic
     const filters = document.querySelectorAll('.filter-btn');
     const items   = document.querySelectorAll('.portfolio-item');
     filters.forEach(btn => btn.addEventListener('click', () => {
@@ -660,6 +778,7 @@
       });
     }));
 
+    // Accordion FAQ logic
     document.querySelectorAll('.faq-trigger').forEach(btn => btn.addEventListener('click', () => {
       const parent = btn.parentElement, content = btn.nextElementSibling;
       const wasActive = parent.classList.contains('active');
@@ -667,6 +786,7 @@
       if (!wasActive) { parent.classList.add('active'); content.style.maxHeight = content.scrollHeight + 'px'; }
     }));
 
+    // Portfolio Lightbox logic
     const lightbox = document.getElementById('lightbox');
     const lbInner  = document.getElementById('lightboxInner');
     const closeBtn = document.getElementById('lightboxClose');
@@ -676,11 +796,11 @@
       if (vid) {
         const c = document.createElement('video');
         c.src = vid.src || vid.dataset.src; c.controls = true; c.autoplay = true; c.playsinline = true;
-        c.style.cssText = 'width:100%;border-radius:8px;';
+        c.style.cssText = 'width:100%;border-radius:4px;';
         lbInner.appendChild(c); c.load(); c.play().catch(() => { c.muted = true; c.play().catch(() => {}); });
       } else if (img) {
         const c = document.createElement('img');
-        c.src = img.src || img.dataset.src; c.style.cssText = 'width:100%;border-radius:8px;'; lbInner.appendChild(c);
+        c.src = img.src || img.dataset.src; c.style.cssText = 'width:100%;border-radius:4px;'; lbInner.appendChild(c);
       }
       lightbox.classList.add('open'); document.body.style.overflow = 'hidden';
     }));
